@@ -51,13 +51,6 @@ class literal : public parser
 		return description;
 	}
 
-	help_text get_help_text(const option_style &, size_t indent) const override
-	{
-		std::string name_str = std::string(indent, ' ') + "\033[1m" + name + "\033[0m";
-		std::string description_str = "\033[3m" + description + "\033[0m";
-		return { { name_str, description_str } };
-	}
-
 	using parser::parse;
 
 	parse_result parse(detail::token_iterator const & tokens,
@@ -89,6 +82,17 @@ class literal : public parser
 	protected:
 	std::string name;
 	std::string description;
+
+	std::string get_print_order_key(const option_style & style) const override
+	{
+		return name;
+	}
+
+	void print_help_text_details(
+		printer & p, const option_style & style) const override
+	{
+		p.option(style, name, description);
+	}
 };
 
 /* tag::reference[]
