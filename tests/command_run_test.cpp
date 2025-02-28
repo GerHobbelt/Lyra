@@ -8,6 +8,12 @@ http://www.boost.org/LICENSE_1_0.txt)
 #include "mini_test.hpp"
 #include <lyra/lyra.hpp>
 
+#include "examples/monolithic_examples.h"
+
+#if defined(BUILD_MONOLITHIC)
+#define main	lyra_command_run_test_main
+#endif
+
 int main(int, const char **)
 {
 	using namespace lyra;

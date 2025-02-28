@@ -12,7 +12,7 @@ http://www.boost.org/LICENSE_1_0.txt)
 
 #include "mini_test.hpp"
 
-int test_main_f(int argc, const char** argv);
+extern "C" static int test_main_f(int argc, const char** argv);
 
 namespace bfg
 {
@@ -37,7 +37,8 @@ namespace mini_test
 	}
 }
 }
-#define main test_main_f
+
+#define OVERRIDE_MAIN_F  test_main_f
 #define TEST_MAIN(S,...) test_main(S, __FILE__, __LINE__, true, __VA_ARGS__)
 #define TEST_MAIN_FAIL(S,...) test_main(S, __FILE__, __LINE__, false, __VA_ARGS__)
 

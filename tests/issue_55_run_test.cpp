@@ -12,7 +12,14 @@ http://www.boost.org/LICENSE_1_0.txt)
 #include <string>
 #include <cstdint>
 
-int main()
+#include "examples/monolithic_examples.h"
+
+#if defined(BUILD_MONOLITHIC)
+#define main	lyra_issue_55_run_test_main
+#endif
+
+int main(void)
+#undef main
 {
 	bfg::mini_test::scope test;
 

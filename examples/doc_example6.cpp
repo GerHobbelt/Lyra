@@ -9,7 +9,16 @@ http://www.boost.org/LICENSE_1_0.txt)
 #include <iostream>
 #include <lyra/lyra.hpp>
 
+#include "examples/monolithic_examples.h"
+
+#if defined(OVERRIDE_MAIN_F)
+#define main OVERRIDE_MAIN_F
+#elif defined(BUILD_MONOLITHIC)
+#define main	lyra_doc_example6_main
+#endif
+
 int main(int argc, const char** argv)
+#undef main
 {
 	int choice = 5;
 	// Ex: <exe> --choice=3

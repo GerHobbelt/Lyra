@@ -36,7 +36,16 @@ With argument groups we can allow such an arrangement.
 #include <string>
 #include <vector>
 
+#include "examples/monolithic_examples.h"
+
+#if defined(OVERRIDE_MAIN_F)
+#define main OVERRIDE_MAIN_F
+#elif defined(BUILD_MONOLITHIC)
+#define main	lyra_doc_groups_main
+#endif
+
 int main(int argc, const char ** argv)
+#undef main
 {
 	// Default to showing a full screen 4/3 aspect
 	bool show_full_screen = true;

@@ -25,7 +25,16 @@ end::doc[] */
 #include <iostream>
 #include <lyra/lyra.hpp>
 
+#include "examples/monolithic_examples.h"
+
+#if defined(OVERRIDE_MAIN_F)
+#define main OVERRIDE_MAIN_F
+#elif defined(BUILD_MONOLITHIC)
+#define main	lyra_doc_simple_alt_main
+#endif
+
 int main(int argc, const char ** argv)
+#undef main
 {
 	return lyra::main() // <1>
 		("-x", 0)("-y", 0)("z", 5) // <2>

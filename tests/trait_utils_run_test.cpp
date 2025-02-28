@@ -25,7 +25,14 @@ constexpr bool is_invocable_v(
 	return false;
 }
 
-int main()
+#include "examples/monolithic_examples.h"
+
+#if defined(BUILD_MONOLITHIC)
+#define main	lyra_trait_utils_run_test_main
+#endif
+
+int main(void)
+#undef main
 {
 	using namespace lyra;
 	bfg::mini_test::scope test;

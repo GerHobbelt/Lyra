@@ -25,7 +25,16 @@ end::doc[] */
 #include <iostream>
 #include <lyra/lyra.hpp>
 
+#include "examples/monolithic_examples.h"
+
+#if defined(OVERRIDE_MAIN_F)
+#define main OVERRIDE_MAIN_F
+#elif defined(BUILD_MONOLITHIC)
+#define main	lyra_count_flag_main
+#endif
+
 int main(int argc, const char ** argv)
+#undef main
 {
 	int verbose = 0; // <1>
 	return lyra::main()

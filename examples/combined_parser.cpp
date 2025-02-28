@@ -8,6 +8,12 @@ http://www.boost.org/LICENSE_1_0.txt)
 #include <iostream>
 #include <lyra/lyra.hpp>
 
+#include "examples/monolithic_examples.h"
+
+#if defined(BUILD_MONOLITHIC)
+#define main	lyra_combined_parser_main
+#endif
+
 int main(int argc, const char** argv)
 {
 	using namespace lyra;

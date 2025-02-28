@@ -111,7 +111,16 @@ struct kill_command // <6>
 	}
 };
 
+#include "examples/monolithic_examples.h"
+
+#if defined(OVERRIDE_MAIN_F)
+#define main OVERRIDE_MAIN_F
+#elif defined(BUILD_MONOLITHIC)
+#define main	lyra_doc_commands_main
+#endif
+
 int main(int argc, const char ** argv)
+#undef main
 {
 	auto cli = lyra::cli();
 	std::string command;
