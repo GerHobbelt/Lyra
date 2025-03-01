@@ -7,7 +7,7 @@
 extern "C" {
 #endif
 
-int lyra_combined_parser_main(void);
+int lyra_combined_parser_main(int argc, const char ** argv);
 int lyra_count_flag_main(int argc, const char ** argv);
 int lyra_doc_commands_main(int argc, const char ** argv);
 int lyra_doc_example1_main(int argc, const char ** argv);
@@ -19,9 +19,9 @@ int lyra_doc_example4_main(int argc, const char ** argv);
 int lyra_doc_example5_main(int argc, const char ** argv);
 int lyra_doc_example6_main(int argc, const char ** argv);
 int lyra_doc_groups_main(int argc, const char ** argv);
-int lyra_doc_simple_main(void);
+int lyra_doc_simple_main(int argc, const char ** argv);
 int lyra_doc_simple_alt_main(int argc, const char ** argv);
-int lyra_option_styles_main(void);
+int lyra_option_styles_main(int argc, const char ** argv);
 int lyra_args_run_test_main(void);
 int lyra_cardinality_run_test_main(void);
 int lyra_cmdline_run_test_main(void);
@@ -52,7 +52,7 @@ int lyra_issue_65_run_test_main(void);
 int lyra_issue_70_run_test_main(void);
 int lyra_issue_73_run_test_main(void);
 int lyra_issue_92_run_test_main(void);
-int lyra_base_exe_main(void);
+int lyra_base_exe_main(int argc, const char ** argv);
 int lyra_literal_run_test_main(void);
 int lyra_main_run_test_main(void);
 int lyra_multiple_flags_run_test_main(void);
