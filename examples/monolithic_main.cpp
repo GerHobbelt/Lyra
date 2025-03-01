@@ -9,7 +9,7 @@
 
 // declare your own monolith dispatch table:
 MONOLITHIC_CMD_TABLE_START()
-{ "combined_parser", { .f = lyra_combined_parser_main } },
+{ "combined_parser", { .fa = lyra_combined_parser_main } },
 { "count_flag", { .fa = lyra_count_flag_main } },
 { "doc_commands", { .fa = lyra_doc_commands_main } },
 { "doc_example1", { .fa = lyra_doc_example1_main } },
@@ -21,9 +21,9 @@ MONOLITHIC_CMD_TABLE_START()
 { "doc_example5", { .fa = lyra_doc_example5_main } },
 { "doc_example6", { .fa = lyra_doc_example6_main } },
 { "doc_groups", { .fa = lyra_doc_groups_main } },
-{ "doc_simple", { .f = lyra_doc_simple_main } },
+{ "doc_simple", { .fa = lyra_doc_simple_main } },
 { "doc_simple_alt", { .fa = lyra_doc_simple_alt_main } },
-{ "option_styles", { .f = lyra_option_styles_main } },
+{ "option_styles", { .fa = lyra_option_styles_main } },
 { "args_run_test", { .f = lyra_args_run_test_main } },
 { "cardinality_run_test", { .f = lyra_cardinality_run_test_main } },
 { "cmdline_run_test", { .f = lyra_cmdline_run_test_main } },
@@ -54,7 +54,7 @@ MONOLITHIC_CMD_TABLE_START()
 { "issue_70_run_test", { .f = lyra_issue_70_run_test_main } },
 { "issue_73_run_test", { .f = lyra_issue_73_run_test_main } },
 { "issue_92_run_test", { .f = lyra_issue_92_run_test_main } },
-{ "base_exe", { .f = lyra_base_exe_main } },
+{ "base_exe", { .fa = lyra_base_exe_main } },
 { "literal_run_test", { .f = lyra_literal_run_test_main } },
 { "main_run_test", { .f = lyra_main_run_test_main } },
 { "multiple_flags_run_test", { .f = lyra_multiple_flags_run_test_main } },
