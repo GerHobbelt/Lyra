@@ -54,7 +54,7 @@ struct is_callable
 	template <class U>
 	static auto test(...) -> decltype(std::false_type());
 
-	static constexpr bool value = decltype(test<F>(0))::value;
+	static constexpr bool value = decltype(test<F>(nullptr))::value;
 };
 
 template <class T>
@@ -75,7 +75,7 @@ struct is_invocable
 	static auto test(...) -> decltype(std::false_type());
 
 	static constexpr bool value
-		= decltype(test<typename remove_cvref<F>::type>(0))::value;
+		= decltype(test<typename remove_cvref<F>::type>(nullptr))::value;
 };
 
 template <typename... Ts>
@@ -2660,8 +2660,8 @@ class arguments : public parser
 		printer & p, const option_style & style) const override
 	{
 		for_each_print_ordered_parser(style, parsers.begin(), parsers.end(),
-			[&](const option_style & style, const parser & q) {
-				q.print_help_text_details(p, style);
+			[&](const option_style & s, const parser & q) {
+				q.print_help_text_details(p, s);
 			});
 	}
 };
