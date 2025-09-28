@@ -240,9 +240,9 @@ follows:
 
 :leveloffset: +1
 
-include::../examples/doc_commands.cpp[tag=doc]
-
 include::../examples/doc_groups.cpp[tag=doc]
+
+include::../examples/doc_commands.cpp[tag=doc]
 
 include::../examples/doc_simple_alt.cpp[tag=doc]
 
@@ -296,6 +296,9 @@ Changes:
 	`option_style::options_print_order` value.
 	-- _René Ferdinand Rivera Morell_
 * *New*: Improve output readability by indenting sub-commands.
+	-- _René Ferdinand Rivera Morell_
+* *New*: Add `lyra::arguments::require` to specify limits on how many successful
+	sub-parsers are required for parsing.
 	-- _René Ferdinand Rivera Morell_
 * Fix `operator|` loosing group subtype causing invalid parsing.
 	-- _René Ferdinand Rivera Morell_
