@@ -1733,7 +1733,7 @@ want to allow either one of these to be specified:</p>
 <span class="p">{</span>
     <span class="c1">// Default to showing a full screen 4/3 aspect</span>
     <span class="kt">bool</span> <span class="n">show_full_screen</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-    <span class="kt">float</span> <span class="n">aspect</span> <span class="o">=</span> <span class="mf">4.0</span><span class="n">f</span> <span class="o">/</span> <span class="mf">3.0</span><span class="n">f</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">aspect</span> <span class="o">=</span> <span class="mf">4.0f</span> <span class="o">/</span> <span class="mf">3.0f</span><span class="p">;</span>
 
     <span class="c1">// If it's not full screen the size will be specified.</span>
     <span class="kt">unsigned</span> <span class="n">width</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
@@ -2122,6 +2122,31 @@ a way to get values of arguments directly specified in the cli.</p>
 </div>
 <div class="paragraph">
 <p>Is-a <a href="#lyra_bound_parser"><code>lyra::bound_parser</code></a>.</p>
+</div>
+<div class="sect3">
+<h4 id="lyra_arg_ctor"><a class="anchor" href="#lyra_arg_ctor"></a>Construction</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="c++"><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">Reference</span><span class="p">&gt;</span>
+<span class="n">arg</span><span class="o">&lt;</span><span class="n">Derived</span><span class="o">&gt;::</span><span class="n">arg</span><span class="p">(</span><span class="n">Reference</span><span class="o">&amp;</span> <span class="n">ref</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">hint</span><span class="p">);</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">Lambda</span><span class="p">&gt;</span>
+<span class="n">arg</span><span class="o">&lt;</span><span class="n">Derived</span><span class="o">&gt;::</span><span class="n">arg</span><span class="p">(</span><span class="n">Lambda</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">ref</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">hint</span><span class="p">);</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">Lambda</span><span class="p">&gt;</span>
+<span class="n">arg</span><span class="o">&lt;</span><span class="n">Derived</span><span class="o">&gt;::</span><span class="n">arg</span><span class="p">(</span><span class="n">Lambda</span> <span class="o">&amp;&amp;</span> <span class="n">ref</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">hint</span><span class="p">);</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Constructs a value argument with a target typed variable or callback. These are
+bare arguments that take a value as in <code>value</code>. In the first form the given
+<code>ref</code> receives the value of the argument after parsing. The second form the
+callback is invoked during the parse with the given value. Both take a
+<code>hint</code> that is used in the help text. When the argument can be specified
+multiple times the callback will be called consecutively for each argument value
+given. And if a container is given as a reference on the first form it will
+contain all the specified values.</p>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -2842,7 +2867,10 @@ communicated through a reference to a variable, a container, or a callback.</p>
 <pre class="rouge highlight"><code data-lang="c++"><span class="n">lyra</span><span class="o">::</span><span class="n">opt</span><span class="o">::</span><span class="n">opt</span><span class="p">(</span><span class="kt">bool</span><span class="o">&amp;</span> <span class="n">ref</span><span class="p">);</span>
 
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">L</span><span class="p">&gt;</span>
-<span class="n">lyra</span><span class="o">::</span><span class="n">opt</span><span class="o">::</span><span class="n">opt</span><span class="p">(</span><span class="n">L</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">ref</span><span class="p">);</span></code></pre>
+<span class="n">lyra</span><span class="o">::</span><span class="n">opt</span><span class="o">::</span><span class="n">opt</span><span class="p">(</span><span class="n">L</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">ref</span><span class="p">);</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">L</span><span class="p">&gt;</span>
+<span class="n">lyra</span><span class="o">::</span><span class="n">opt</span><span class="o">::</span><span class="n">opt</span><span class="p">(</span><span class="n">L</span> <span class="o">&amp;&amp;</span> <span class="n">ref</span><span class="p">);</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2860,7 +2888,10 @@ option is present.</p>
 <span class="n">lyra</span><span class="o">::</span><span class="n">opt</span><span class="o">::</span><span class="n">opt</span><span class="p">(</span><span class="n">T</span><span class="o">&amp;</span> <span class="n">ref</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">hint</span><span class="p">);</span>
 
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">L</span><span class="p">&gt;</span>
-<span class="n">lyra</span><span class="o">::</span><span class="n">opt</span><span class="o">::</span><span class="n">opt</span><span class="p">(</span><span class="n">L</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">ref</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">hint</span><span class="p">)</span></code></pre>
+<span class="n">lyra</span><span class="o">::</span><span class="n">opt</span><span class="o">::</span><span class="n">opt</span><span class="p">(</span><span class="n">L</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">ref</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">hint</span><span class="p">)</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">L</span><span class="p">&gt;</span>
+<span class="n">lyra</span><span class="o">::</span><span class="n">opt</span><span class="o">::</span><span class="n">opt</span><span class="p">(</span><span class="n">L</span> <span class="o">&amp;&amp;</span> <span class="n">ref</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">hint</span><span class="p">)</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3064,7 +3095,11 @@ two <code>composable_parser</code> instances generates a <code>cli</code> parser
 
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">Derived</span><span class="p">&gt;</span>
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">Lambda</span><span class="p">&gt;</span>
-<span class="n">bound_parser</span><span class="o">&lt;</span><span class="n">Derived</span><span class="o">&gt;::</span><span class="n">bound_parser</span><span class="p">(</span><span class="n">Lambda</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">ref</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">hint</span><span class="p">);</span></code></pre>
+<span class="n">bound_parser</span><span class="o">&lt;</span><span class="n">Derived</span><span class="o">&gt;::</span><span class="n">bound_parser</span><span class="p">(</span><span class="n">Lambda</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">ref</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">hint</span><span class="p">);</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">Derived</span><span class="p">&gt;</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">Lambda</span><span class="p">&gt;</span>
+<span class="n">bound_parser</span><span class="o">&lt;</span><span class="n">Derived</span><span class="o">&gt;::</span><span class="n">bound_parser</span><span class="p">(</span><span class="n">Lambda</span> <span class="o">&amp;&amp;</span> <span class="n">ref</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">hint</span><span class="p">);</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3310,6 +3345,9 @@ their output through the <code>printer</code> object.&#8201;&#8212;&#8201;<em>Re
 </li>
 <li>
 <p>Fix parsing with mix of required and optional arguments.&#8201;&#8212;&#8201;<em>René Ferdinand Rivera Morell</em></p>
+</li>
+<li>
+<p>Fix passing move-only lambdas to <code>opt</code> and <code>arg</code> parsers.&#8201;&#8212;&#8201;<em>René Ferdinand Rivera Morell</em></p>
 </li>
 <li>
 <p>Tested with
